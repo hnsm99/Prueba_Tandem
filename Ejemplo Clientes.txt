@@ -1,0 +1,4 @@
+10236955474|Jose Tandem|25|false|2|Dolor de garganta
+10236955475|Jose Tandem1|25|false|2|Dolor de garganta
+10236955476|Jose Tandem2|25|false|2|Dolor de garganta
+10236955477|Jose Tandem3|25|false|2|Dolor de garganta

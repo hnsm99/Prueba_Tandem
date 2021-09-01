@@ -1,0 +1,28 @@
+﻿@model Prueba_Tandem.Models.UploadModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Cargar Inicializacion</h3>
+            <form enctype="multipart/form-data" method="post" asp-controller="Inicializacion" asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">Pacientes</label>
+                    <input asp-for="Clientes" type="file" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Consultorio</label>
+                    <input asp-for="Consultorios" type="file" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="Iniciar" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

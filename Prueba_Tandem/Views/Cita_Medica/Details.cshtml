@@ -1,0 +1,85 @@
+﻿@model Prueba_Tandem.Models.MCita_Medica.Cita_MedicaIndex
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Gestor de cita medica</h3>
+                <form asp-controller="Cita_Medica" asp-action="Alta">
+                    <div class="form-group">
+                        <label class="control-label">Paciente</label>
+                        <input asp-for="Id" value="@Model.Id" readonly class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Paciente</label>
+                        <input value="@Model.StrPaciente" readonly class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Paciente</label>
+                        <input value="@Model.StrPaciente" readonly class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Consultorio</label>
+                        <input value="@Model.Consultorio" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Medico Tratante</label>
+                        <input value="@Model.strMedico" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Prueba de virus solicitada</label>
+                        @if (Model.Prueba == false)
+                        {<input value="No" class="form-control" readonly />}
+                        else
+                        {<input value="Sí" class="form-control" readonly />}
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Resultado Prueba</label>
+                        @if (Model.Virus == false)
+                        {<input value="Negativo" class="form-control" readonly />}
+                        else
+                        {<input value="Positivo" class="form-control" readonly />}
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Dado de alta</label>
+                        @if (Model.Alta == false)
+                        {<input value="No" class="form-control" readonly />}
+                        else
+                        {<input value="Si" class="form-control" readonly />}
+                    </div>
+                    @if (Model.Alta == false)
+                    {
+                        <div class="form-group">
+                            <label class="control-label">Diagnostico</label>
+                            <input asp-for="Diagnostico" class="form-control" />
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        @if (Model.Prueba == false && Model.Alta == false)
+                        {
+                            <a asp-action="SPrueba" asp-controller="Cita_Medica" asp-route-id="@Model.Id" class="btn btn-danger">Solicitar Prueba</a>
+                        }
+                        @if (Model.Alta == false)
+                        {
+                            <input class="btn btn-success" type="submit" value="Dar de Alta" />
+                            @*<a asp-action="Alta" asp-controller="Cita_Medica" asp-route-id="@Model.Id" class="btn btn-success">Dar de Alta</a>*@
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>No se logro encontrar la cita medica buscada.</p>
+}
+
+

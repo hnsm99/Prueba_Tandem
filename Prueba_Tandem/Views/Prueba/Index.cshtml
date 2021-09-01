@@ -1,0 +1,31 @@
+﻿@model Prueba_Tandem.Models.MPrueba.Prueba
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+@if (Model!=null)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Cargar Prueba</h3>
+                <form enctype="multipart/form-data" method="post" asp-controller="Prueba" asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input asp-for="Cita_Medica" value="@Model.Cita_Medica" type="hidden" readonly class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Resultado</label>
+                        <input asp-for="Archivo" type="file" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="Enviar Prueba" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+

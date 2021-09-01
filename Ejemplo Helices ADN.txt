@@ -1,0 +1,2 @@
+T,T,C,G,G,A,G,T,A,A,C,A,C,G,C,C,T,A
+A,A,G,C,C,T,C,A,T,T,G,T,G,C,G,G,A,T

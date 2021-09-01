@@ -1,0 +1,152 @@
+﻿@model List<Prueba_Tandem.Models.MPaciente.PacienteIndex>
+@{
+    ViewData["Title"] = "Lista de Pacientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @if (TempData["Exito"] != null)
+    {
+        <div class="alert alert-warning alert-dismissable fade show" role="alert">@TempData["Exito"]</div>
+        <button type="button" class="close" date-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    }
+    <div class="row">
+        <div class="col-sm-12">
+            <a class="btn btn-success d-block" asp-action="Create" asp-controller="Paciente">Crear nuevo paciente</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Lista de Pacientes Enfermos</h3>
+            @if (Model.Where(m => m.Estado == 1).Count() > 0)
+            {
+                <table class="table table-bordered table-responsive table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <td>Identificacion</td>
+                            <td>Nombre</td>
+                            <td>Edad</td>
+                            <td>Sexo</td>
+                            <td>Triage</td>
+                            <td>Sintomas</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderByDescending(m => m.Triage).Where(m => m.Estado == 1))//Enfermos
+                        {
+                            <tr>
+                                <td>@item.Identificacion</td>
+                                <td>@item.Nombre</td>
+                                <td>@item.Edad</td>
+                                <td>
+                                    @if (item.Sexo == false)
+                                    {<p>Masculino</p>}
+                                    else
+                                    {<p>Femenino</p>}
+                                </td>
+                                <td>@item.triages</td>
+                                <td>@item.Sintomas</td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            }
+            else
+            {
+                <p>No existen registros.</p>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Lista de Pacientes En Atencion</h3>
+            @if (Model.Where(m => m.Estado == 2).Count() > 0)
+            {
+                <table class="table table-bordered table-responsive table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <td>Identificacion</td>
+                            <td>Nombre</td>
+                            <td>Edad</td>
+                            <td>Sexo</td>
+                            <td>Triage</td>
+                            <td>Sintomas</td>
+                            <td>Consultorio</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(m => m.Estado == 2))//En atencion
+                        {
+                            <tr>
+                                <td>@item.Identificacion</td>
+                                <td>@item.Nombre</td>
+                                <td>@item.Edad</td>
+                                <td>
+                                    @if (item.Sexo == false)
+                                    {<p>Masculino</p>}
+                                    else
+                                    {<p>Femenino</p>}
+                                </td>
+                                <td>@item.triages</td>
+                                <td>@item.Sintomas</td>
+                                <td><p>@item.cita_medica.Where(m=>m.Paciente.Equals(item.Identificacion)).Select(m=>m.Consultorio).FirstOrDefault()|</p>@item.cita_medica.Where(m => m.Paciente.Equals(item.Identificacion)).Select(m => m.strMedico).FirstOrDefault()</td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            }
+            else
+            {
+                <p>No existen registros.</p>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Lista de Pacientes Recuperados</h3>
+            @if (Model.Where(m => m.Estado == 3).Count() > 0)
+            {
+                <table class="table table-bordered table-responsive table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <td>Identificacion</td>
+                            <td>Nombre</td>
+                            <td>Edad</td>
+                            <td>Sexo</td>
+                            <td>Triage</td>
+                            <td>Sintomas</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(m => m.Estado == 3))//Recuperados
+                        {
+                            <tr>
+                                <td>@item.Identificacion</td>
+                                <td>@item.Nombre</td>
+                                <td>@item.Edad</td>
+                                <td>
+                                    @if (item.Sexo == false)
+                                    {<p>Masculino</p>}
+                                    else
+                                    {<p>Femenino</p>}
+                                </td>
+                                <td>@item.triages</td>
+                                <td>@item.Sintomas</td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            }
+            else
+            {
+                <p>No existen registros.</p>
+            }
+        </div>
+    </div>
+</div>
+
